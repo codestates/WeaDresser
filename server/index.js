@@ -7,7 +7,7 @@ const session = require("express-session");
 const indexRouter = require("./routers");
 const cookieParser = require("cookie-parser");
 //require("./models");
-// const sequelize = require('Sequelize')
+const sequelize = require("Sequelize");
 
 // const port = process.env.HTTP_PORT || 4000;
 const port = 80;
@@ -41,7 +41,7 @@ app.get("/check", (req, res) => {
   res.send("check point success");
 });
 
-// sequelize.sync({ force: false, alter: true }) // <- sequelize init 필요 ! (보류)
+sequelize.sync({ force: false, alter: true }); // <- sequelize init 필요 ! (보류)
 // let credentials ; // "여기에 AWS 키"
 // let server;
 // if(credentials){
