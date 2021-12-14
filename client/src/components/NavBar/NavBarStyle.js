@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const NavContaier = styled.nav`
     width:100vw;
-    height: 8em;
+    height: 7em;
     padding: 0 3em;
     box-sizing: border-box;
     display: flex;

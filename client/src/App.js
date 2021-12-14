@@ -45,7 +45,7 @@ function App() {
           <Route path = '/record'><RecordPage /></Route>
         </Switch>
         <Modal/>
-        <DiaryPage />
+        {/* <DiaryPage /> */}
       </div>
       <Footer/>
     </BrowserRouter>

@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 // const sequelize = require('Sequelize')
 
 // const port = process.env.HTTP_PORT || 4000;
-const port = 80;
+const PORT = 80;
 const client = `${process.env.CLIENT_URL}` 
 const test = `https://localhost:3000`
 app.use(express.json());
@@ -49,5 +49,5 @@ app.get("/check", (req, res) => {
 // server.listen(port, () =>  console.log("httpSSS server running"))
 // }
 // else{
-app.listen(port, () => console.log("http server running"));
+app.listen(PORT, () => console.log("http server running"));
 // }

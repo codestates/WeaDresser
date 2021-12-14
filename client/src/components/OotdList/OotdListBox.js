@@ -188,8 +188,8 @@ function OotdListBox(){
                     return <OotdListBoxBack ref={ootdImageBox} className="ootd-image-box" key={idx} onClick={(e) => clickedImage(e)} >
                         <OotdListBoxOver>
                         <OotdListBoxImage  src={`${val.diariesImage}`} className="ootdImage" />
-                        {<OotdListBoxItem className="ootd-list-box-item"></OotdListBoxItem>}
-                        <OotdLikeCont likeCounts={val.likeCounts} likeWhether={val.likeWhether ? val.likeWhether : false} diariesId={val.diariesId}/>
+                        <OotdListBoxItem className="ootd-list-box-item"></OotdListBoxItem>
+                        <OotdLikeCont likeCounts={val.likeCounts} likeWhether={val.likeWhether ? val.likeWhether : false} diariesId={val.diariesId} likeClass={"like-container"}/>
                         <DiaryUserName className="diary-user-name">{val.userName}</DiaryUserName> {/* 작성자 이름 */}
                         </OotdListBoxOver>
                         <OotdHashtags className="ootd-hashtags">

@@ -1,11 +1,11 @@
 const { User, Diarie, Like, sequelize } = require("../models");
-const { isAuthorized } = require("./tokenfunction/index");
+const { isAuthorized, isValid } = require("./tokenfunction/index");
 const { Op } = require("sequelize");
 module.exports = {
   // * GET  /ootd   또는   /ootd?offset= & limit= 
   findTopLike :async (req, res) => {
     let { offset, limit, tempMax, tempMin } = req.query;
-    tempMax = Number(tempMax) + 10;
+    tempMax = Number(tempMax) + 20;
     tempMin -= 10;
     let id;
     if(!isAuthorized(req)){
@@ -26,6 +26,7 @@ module.exports = {
         { raw: true }
       )
         .catch(err => {
+          console.log(err)
           res.status(500).send("Internal server error")
         })
     }else{
@@ -40,6 +41,7 @@ module.exports = {
         { raw: true }
       )
         .catch(err => {
+          console.log(err)
           res.status(500).send("Internal server error")
         })
     }
@@ -50,17 +52,18 @@ module.exports = {
 
   // * POST  /ootd/like
   addLike: async (req, res) => {
-    const {id} = isAuthorized(req);
+    const userInfo = isAuthorized(req);
     const { diariesId, like} = req.body;
+    const validUser = await isValid(userInfo.email, userInfo.id);
     if (!diariesId) {
       return res.status(400).send("Bad Request");
     }
-    if (!id) {
+    if (!validUser) {
       return res.status(401).json({ message: "unauthorized" });
     }
     if(like === true){
       await Like.create({
-        userId: id,
+        userId: validUser.dataValues.id,
         diariesId: diariesId
       }).then(() => {
         res.status(200).send()
@@ -70,7 +73,7 @@ module.exports = {
       })
     }else{
       await Like.destroy(
-        {where: {userId: id, diariesId: diariesId}}
+        {where: {userId: validUser.dataValues.id, diariesId: diariesId}}
         ).then(() => {
           res.status(200).send()
         }).catch(err => {
@@ -81,13 +84,13 @@ module.exports = {
   },
 
   handleLike: async (req, res) => {
-    const {id} = isAuthorized(req);
     const { diariesId, like } = req.body;
-
+    const userInfo = isAuthorized(req);
+    const validUser = await isValid(userInfo.email, userInfo.id);
     if (!diariesId) {
       return res.status(400).send("Bad Request");
     }
-    if (!id) {
+    if (!validUser) {
       return res.status(401).json({ message: "unauthorized" });
     }
 

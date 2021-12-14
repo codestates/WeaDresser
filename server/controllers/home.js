@@ -1,4 +1,5 @@
 const { sequelize } = require('../models')
+const { isAuthorized, isValid } = require("./tokenfunction/index");
 const { findTopLikeById, findLatestById, findRandomOne, findTopLikeOne } = require('./query/query')
 module.exports = {
   // * GET  /?tempMin={}&tempMax={}
@@ -28,6 +29,7 @@ module.exports = {
       })
       .catch( err => {
         //!Todo error handlring (DB query => too much request,then server will break )
+        console.log(err)
         return res.status(500).send("Internal Server err") 
       })    
   }, 
@@ -35,9 +37,15 @@ module.exports = {
   // * GET  /user/?userId={}&tempMax={}&tempMin={}  
   findById : async (req, res) => {
     
-    const { userId, tempMax, tempMin }= req.query
-    const userQuery = findLatestById(userId, tempMin, tempMax) // leftOne
-    const topQuery = findTopLikeById(userId, tempMin, tempMax); // rightOne
+    const { tempMax, tempMin }= req.query
+    const userInfo = isAuthorized(req);
+    const validUser = await isValid(userInfo.email, userInfo.id);
+    if(!validUser){
+      return res.status(404).json("not authorized!");
+    }
+
+    const userQuery = findLatestById(validUser.dataValues.id, tempMin, tempMax) // leftOne
+    const topQuery = findTopLikeById(validUser.dataValues.id, tempMin, tempMax); // rightOne
 
     // find one by userId
     return sequelize.query( userQuery, { raw: true } )

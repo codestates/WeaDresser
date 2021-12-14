@@ -16,33 +16,89 @@ export const LowerPageBox = styled.div`
     justify-content: space-between
 `
 export const UserWore = styled.div`
+    border: 1px solid #000;
     width: 48%;
-    background: #ddd;
+    position: relative;
+    &:hover{
+        .ootd-list-box-item{
+            border-radius: 0;
+            background: #000;
+            opacity: 0.5;
+        }
+        .user-wore-like{
+            display: block;
+            top: 42%;
+        }
+    }
 `
 export const UserWoreImage = styled.div`
+    position: relative;
+    border: 1px solid #000;
     background-image: url(${props => props.woreUrl});
-    background-color: #ddd;
-    width: 90%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
     height: 30em;
+    margin-bottom: 3em;
+    cursor: pointer;
 `
 export const UserWoreText = styled.p`
-
+    font-size: 1.3em;
 `
 export const BestDresser = styled.div`
-    background: #ddd;
+    border: 1px solid #000;
     width: 48%;
+    position: relative;
+    &:hover{
+        .ootd-list-box-item{
+            border-radius: 0;
+            background: #000;
+            opacity: 0.5;
+        }
+        .best-ootd-like{
+            display: block;
+            top: 42%;
+        }
+    }
 `
 export const BestDresserImage = styled.div`
+    position: relative;
     background-image: url(${props => props.bestUrl});
-    background-color: #ddd;
-    width: 90%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
     height: 30em;
+    margin-bottom: 3em;
+    cursor: pointer;
 `
 export const BestDresserText = styled.p`
-
+    font-size: 1.3em;
+    text-align: center;
 `
 export const OotdListBtn = styled(Link)`
-
+    width: 11em;
+    height: 1.8em;
+    position: absolute;
+    bottom: 1em;
+    right: 5%;
+    font-size: 1.3em;
+    display: flex;
+    line-height: 1.8em;
+    align-items: center;
+    color: #2862e5;
+    font-size: 1.5em;
+    &:hover{
+        justify-content: space-between;
+        color: #2862e5;
+        text-decoration: none;
+    }
+    >span{
+        display: inline-block;
+        height: 1.8em;
+        line-height: 1.8em;
+    }
 `
 export const RecordBtn = styled(Link)`
     
