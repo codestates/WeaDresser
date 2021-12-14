@@ -1,7 +1,36 @@
+const multer = require("multer");
+const { isAuthorized } = require("./tokenfunction/index");
+const { User, Diarie, Hashtag } = require('../models')
+
+
 module.exports = {
   // * POST  /record 
-  create : (req, res) => {
-    return res.send("POST /record routing good now, check your body")
+  create : async(req, res) => {
+    // formData.append('weatherData', weatherData);
+    //     formData.append('image', uploadImage);
+    //     formData.append('content', inputContent);
+    //     formData.append('hashtag', inputHashtag);
+    //     formData.append('share', sharePost);
+
+    const {userId, content,hashtag,share,tempMin, tempMax, temp} =req.body
+    const insertTag = hashtag.map( ele => { 
+      let obj = { name : ele }
+      return obj
+     })
+     
+    const data = await Diarie.findOne({where: {userId}})
+    if(!data){
+      if(content && hashtag && share && tempMin && tempMax && temp){
+        let img
+        if(!req.file.location){
+          img = null
+        }
+        else{
+          img =req.file.location
+        }
+        const 
+      }
+    }
   },
 
 }
