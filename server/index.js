@@ -12,7 +12,7 @@ const cookieParser = require("cookie-parser");
 
 // const port = process.env.HTTP_PORT || 4000;
 const PORT = 80;
-//const client = `${process.env.CLIENT_URL}`
+const client = `${process.env.CLIENT_URL}`;
 const test = `https://localhost:3000`;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://localhost:3000"],
+    origin: client,
     // origin : true,
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"],
