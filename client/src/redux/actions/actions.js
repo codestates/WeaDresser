@@ -9,6 +9,7 @@ export const WEATHER_DATA = "WEATHER_DATA";
 export const IS_SHOW_SIDE_BAR = "IS_SHOW_SIDE_BAR";
 export const IS_SHOW_DATE_PICKER = "IS_SHOW_DATE_PICKER";
 export const DATE_DATA = "DATE_DATA";
+export const MYPAGE_RECORD_DATA = "MYPAGE_RECORD_DATA";
 
 export function loginSuccessHandler(boolean, accessToken) {
     return (dispatch) => {
@@ -127,11 +128,20 @@ export function datePickerHandler(boolean){
     }
 }
 
-export function getDateData(data){
+export function getDateData(data) {
     return{
         type: DATE_DATA,
         payload: {
             dateData : data
+        }
+    }
+}
+
+export function recordDataHandler(data) {
+    return{
+        type: MYPAGE_RECORD_DATA,
+        payload: {
+            data
         }
     }
 }

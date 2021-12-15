@@ -59,12 +59,12 @@ export const WeatherIconBox = styled.ul`
     display: flex;
     align-items: center;
     
-    @media screen and (max-width: 77em) {
+    /* @media screen and (max-width: 77em) {
       width: 70%;
       height: 40em;
       flex-wrap: wrap;
       justify-content: space-around;
-    }
+    } */
     .icon1 {
       width: 22em;
       height: 22em;

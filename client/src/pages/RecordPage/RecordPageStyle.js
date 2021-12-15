@@ -69,6 +69,7 @@ export const RecordContainer = styled.div`
         border: solid 1px #ddd;
         background-color: #fff;
         text-align: center;
+        margin-left: 0.5em;
     }
     .content-head {
         height: 8%;
@@ -82,7 +83,9 @@ export const RecordContainer = styled.div`
         letter-spacing: 0.1em;
     }
 `
-
+export const RecordForm = styled.form`
+    display: flex;
+`
 export const ContentBox = styled.textarea`
     /* padding-left: 1.5em;
     padding-top: 1em; */
@@ -100,7 +103,7 @@ export const ContentBox = styled.textarea`
 
 `
 
-export const HashtagBox = styled.div`
+export const HashtagBox = styled.ul`
     margin: 1em auto;
     width: 43rem;
     height: 11rem;
@@ -111,39 +114,35 @@ export const HashtagBox = styled.div`
     letter-spacing: 2px;
     color: #93969b;
     overflow-y: auto;
-
-    > ul {
+    display: flex;
+    flex-wrap: wrap;
+    .hashtag {
+        width: auto;
+        height: 2.8rem;
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        padding: 0 8px;
+        font-size: 1.4rem;
+        list-style: none;
+        border-radius: 4px;
+        margin: 0 4px 4px 0;
+        background-color: #5694F8;
+        :hover {
+            background-color: #3471d5;
+        }
 
-        .hashtag {
-            width: auto;
-            height: 2.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            padding: 0 8px;
-            font-size: 1.4rem;
-            list-style: none;
-            border-radius: 4px;
-            margin: 0 4px 4px 0;
-            background-color: #5694F8;
-            :hover {
-                background-color: #3471d5;
-            }
-
-            .close-button {
-                width: 1.2rem;
-                height: 1.2rem;
-                margin-left: 5px;
-                margin-bottom: 1px;
-                background-image: url(${close});
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-                cursor: pointer;
-            }
+        .close-button {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-left: 5px;
+            margin-bottom: 1px;
+            background-image: url(${close});
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
         }
     }
     .input-tag {
@@ -244,41 +243,42 @@ export const ImageUploadBox = styled.div`
     }
     
 `
-export const UploadButton = styled.div`
-    margin: 0 auto;
-    padding-top: 1.1em;
+export const UploadButton = styled.button.attrs(props => ({
+    type: "submit",
+}))`
     width: 23rem;
-    height: 6rem;
-    top: 82.5%;
-    position: absolute;
+    height: 8rem;
+    top: 93%;
+    right: 1%;
+    position: relative;
     cursor: ${props => props.canSubmit ? 'pointer' : 'default'};
     text-align: center;
     border-radius: 10px;
     font-family: NotoSansKR;
     font-size: 2.5em;
+    line-height: 3.4;
     color: #fff;
-    opacity: ${props => props.canSubmit ? null : '0.6'};
     font-weight: 500;
     letter-spacing: 5px;
+    opacity: ${props => props.canSubmit ? null : '0.6'};
     background-color: ${props => props.canSubmit ? '#4970ed' : '#a6a9af'};
     :hover {
         background-color: ${props => props.canSubmit ? '#16409f' : null};
     }
 `
 
-export const CancelButton = styled.div`
-    margin: 0 auto;
-    padding-top: 1.1em;
+export const CancelButton = styled.button`
     width: 23rem;
-    height: 6rem;
-    top: 82.5%;
-    left: 77%;
-    position: absolute;
+    height: 8rem;
+    top: 93%;
+    left: 1%;
+    position: relative;
     cursor: pointer;
     text-align: center;
     border-radius: 10px;
     font-family: NotoSansKR;
     font-size: 2.5em;
+    line-height: 3.4;
     color: #fff;
     font-weight: 500;
     letter-spacing: 5px;

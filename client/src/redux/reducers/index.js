@@ -9,7 +9,8 @@ import {
     WEATHER_DATA,
     IS_SHOW_SIDE_BAR,
     IS_SHOW_DATE_PICKER,
-    DATE_DATA
+    DATE_DATA,
+    MYPAGE_RECORD_DATA
 } from '../actions/actions';
 import { initialState } from './initialState';
 
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     getWeatherDataReducer,
     isShowSideBarReducer,
     isShowDatePickerReducer,
-    getDateDataReducer
+    getDateDataReducer,
+    getRecordDataReducer
 })
 
 function isLoginReducer(state = initialState.isLogin, action) {
@@ -100,6 +102,16 @@ function getDateDataReducer(state = initialState.getDateData, action){
     case DATE_DATA:
       return Object.assign({}, {
         getDateData: action.payload.getDateData
+      });
+    default: return state;
+  }
+}
+
+function getRecordDataReducer(state = initialState.getRecordData, action) {
+  switch (action.type) {
+    case MYPAGE_RECORD_DATA:
+      return Object.assign({}, {
+        getRecordData: action.payload.data
       });
     default: return state;
   }

@@ -10,6 +10,32 @@ import calendarHover from '../../images/calendar_ic_hover.svg';
 import { getDateData } from '../../redux/actions/actions';
 registerLocale('ko', ko);
 
+function DatePicker({ curDate, setCurDate }) {
+    
+    // const dispatch = useDispatch();
+    // const [curDate, setCurDate] = useState(new Date());
+    // console.log(curDate.getMonth()+1,'월', curDate.getDate(),'일')
+    
+    // propSetCurDate(curDate);
+    // useEffect(() => {
+    //     // dispatch(getDateData(curDate));
+    // }, [curDate]);
+
+    return (
+        <StyledDatePicker
+            locale='ko'
+            selected={curDate}
+            onChange={(date) => setCurDate(date)} 
+            // open={isOpenDatePicker}
+            showPopperArrow={false}
+            dateFormat="MM월 dd일"
+            maxDate={new Date()}
+        />
+    )
+}
+
+export default DatePicker
+
 const StyledDatePicker = styled(DatePickerBox)` // datepicker date만 css // 달력 css 추후 작업
     font-size: 2.2em;
     width: 6em;
@@ -28,27 +54,3 @@ const StyledDatePicker = styled(DatePickerBox)` // datepicker date만 css // 달
         background-image: url(${calendarHover});
     }
 `
-
-function DatePicker() {
-    
-    const dispatch = useDispatch();
-    const [curDate, setCurDate] = useState(new Date());
-    // console.log(curDate.getMonth()+1,'월', curDate.getDate()+1,'일')
-    useEffect(() => {
-        dispatch(getDateData(curDate));
-    }, [curDate]);
-
-    return (
-        <StyledDatePicker
-            locale='ko'
-            selected={curDate}
-            onChange={(date) => setCurDate(date)} 
-            // open={isOpenDatePicker}
-            showPopperArrow={false}
-            dateFormat="MM월 dd일"
-            maxDate={new Date()}
-        />
-    )
-}
-
-export default DatePicker

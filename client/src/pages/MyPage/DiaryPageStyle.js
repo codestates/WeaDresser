@@ -100,6 +100,18 @@ export const MyPageTabBox = styled.div`
         background-color: #f4f4f8;
         cursor: pointer;
 
+        :hover {
+            background-color: #fff;
+            color: #2862e5;
+            &:after {
+                position: absolute;
+                width: 30.15rem;
+                height: 7.5rem;
+                left: 0;
+                content: "";
+                border-bottom: 0.4rem solid #2862e5;
+            }
+        }
     }
 `
 
@@ -204,8 +216,8 @@ export const RecordContainer = styled.div`
     margin: 0 auto;
     top: 7.5%;
     position: relative;
-    background: burlywood;
-    overflow: hidden;
+    background-color: #f9f9fb;
+    overflow: ${props => props.isEdit ? "visible" : "hidden"};
 `
 export const SlideContainer = styled.div`
     width: auto;
@@ -228,33 +240,34 @@ export const ImageBox = styled.div`
 `
 export const ContentBox = styled.div`
     width: 47.0rem;
-    height: 13em;
+    height: 13rem;
     /* background: cornflowerblue; */
     font-family: NotoSansKR;
     font-size: 1.4em;
     line-height: 2.5;
     letter-spacing: normal;
     margin-left: 0.5em;
-    color: #3b3c3c;
+    background-color: #f9f9fb;
 `
-export const HashtagBox = styled.div`
+export const HashtagBox = styled.ul`
     width: 47.8rem;
     height: 8.5em;
+    padding-top: 0.5em;
     position: relative;
     background: wheat;
-    /* display: flex; */
+    display: flex;
+    flex-wrap: wrap;
 
 
     > span {
         width: auto;
-        height: 3em;
-        /* display: flex; */
+        height: 3rem;
+        display: flex;
         align-items: center;
         justify-content: center;
         color: #fff;
         padding: 0 8px;
         font-size: 1.4rem;
-        list-style: none;
         border-radius: 4px;
         margin: 0 4px 4px 0.5em;
         background-color: #5694F8;
@@ -295,10 +308,6 @@ export const Button2 = styled.div`
     }
 `
 
-
-
-
-
 export const DotMenuBox = styled.div`
     bottom: 73.5%;
     left: 75%;
@@ -320,51 +329,69 @@ export const DotMenuBox = styled.div`
 export const DotMenu = styled.div`
     display: ${props => props.isDotMenu ? 'block' : 'none'};
     width: 9.4em;
-    height: 10.1em;
+    height: 10em;
     position: relative;
     border-radius: 8px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
     border: solid 1px #d9d9d9;
     background-color: #fff;
     left: 2.5em;
+`
+export const DotMenuButton1 = styled.button`
+    width: 100%;
+    height: 5rem;
+    position: relative;
+    font-family: NanumBarunGothicOTF;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 3;
+    letter-spacing: normal;
+    color: #2862e5;
+    border-bottom: solid 1px #d9d9d9;
+    cursor: pointer;
 
-    .edit-btn {
-        display: ${props => props.isDotMenu ? 'block' : 'none'};
-        width: 100%;
-        height: 5rem;
-        position: relative;
-        font-family: NanumBarunGothicOTF;
-        font-size: 1.8em;
-        font-weight: bold;
-        text-align: center;
-        line-height: 3;
-        letter-spacing: normal;
-        color: #2862e5;
-        border-bottom: solid 1px #d9d9d9;
-        cursor: pointer;
-
-        :hover {
-            background-color: #f2f2f4;
-        }
+    :hover {
+        background-color: #f2f2f4;
     }
+`
+export const DotMenuButton2 = styled.button`
+    width: 100%;
+    height: 5rem;
+    position: relative;
+    font-family: NanumBarunGothicOTF;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 2.8;
+    letter-spacing: normal;
+    color: #ed3829;
+    border-bottom: solid 1px #d9d9d9;
+    cursor: pointer;
 
-    .delete-btn {
-        display: ${props => props.isDotMenu ? 'block' : 'none'};
-        width: 100%;
-        height: 5rem;
-        position: relative;
-        font-family: NanumBarunGothicOTF;
-        font-size: 1.8em;
-        font-weight: bold;
-        text-align: center;
-        line-height: 2.8;
-        letter-spacing: normal;
-        color: #ed3829;
-        border-bottom: solid 1px #d9d9d9;
-        cursor: pointer;
+    :hover {
+        background-color: #f2f2f4;
+    }
+`
 
-        :hover {
-            background-color: #f2f2f4;
-        }
+export const DotMenuButton3 = styled.button.attrs(props => ({
+    type: "submit",
+    form: "record",
+}))`
+    width: 100%;
+    height: 5rem;
+    position: relative;
+    font-family: NanumBarunGothicOTF;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 3;
+    letter-spacing: normal;
+    color: #2862e5;
+    border-bottom: solid 1px #d9d9d9;
+    cursor: pointer;
+
+    :hover {
+        background-color: #f2f2f4;
     }
 `
