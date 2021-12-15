@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getEmailValidation } from '../../../api/signup'
-import { createUserHandler } from '../../../redux/actions/actions'
+import { getEmailValidation } from './api/signup'
 import { useDispatch, useSelector } from 'react-redux';
-import { isShowLoginModalHandler, isShowSignUpModalHandler } from '../../../redux/actions/actions';
+import { isShowLoginModalHandler, isShowSignUpModalHandler } from '../redux/actions/actions';
 import axios from 'axios';
+require('dotenv').config();
+
 export const useForm = () => {
   // state values to give input value 
   const [values, setValues] = useState({
@@ -18,7 +19,7 @@ export const useForm = () => {
   const [isValid, setIsValid ] = useState( [false, false] );
   const [codeMsg, setCodeMsg] = useState({ on : false, msg: "" })
   const [toLogin, setToLogin] = useState({ on: false }) // back to login component
-  const [goodToGo, setGoodToGo] = useState(false); // !good to call api request !
+  const [goodToGo, setGoodToGo] = useState(false); // * good to call api request!
   const [payload, setPayload] = useState({}); 
   // Since the email component disappeared, has to save it as state value to payload 
   const pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -29,7 +30,7 @@ export const useForm = () => {
     setValues({ ...values, [name] : value})
   };
 
-  // Set input-radio values when change 
+  // Set input-radio values on change 
   const handleRadioChange = e => {
     if(e.target.checked){
       setValues({...values, gender : e.target.value})
@@ -43,7 +44,7 @@ export const useForm = () => {
     setToLogin({ on: false, msg : "" })
   };
   
-  // Form tag onSubmit handler Only on Sign form-tag
+  // Form tag onSubmit handler 
   const handleSubmit = e => {
     e.preventDefault();
     const newErrors = validationInfo(values);
@@ -70,10 +71,7 @@ export const useForm = () => {
         //! the moment to save email on payload 
         if( email ) setPayload({ email })
         setErrors({ on : true, msg :"이메일 인증을 완료해 주세요" });
-        // setErrors({ on : true, msg :"사용 가능한 이메일 입니다." });
-        // setCodeMsg({ on: true, msg : "이메일 인증을 완료해 주세요" });
-        setIsValid([true, isValid[1]]); // email done so to go on to the next (code validation)
-        
+        setIsValid([true, isValid[1]]); // done with email valid 
       }
       else if ( resultStatus === 203 ){
         setIsValid([false, isValid[1]]); 
@@ -91,26 +89,27 @@ export const useForm = () => {
     if(!values.code || values.code.length !== 6){
       setErrors({ on:true, msg :"6자리 인증 코드를 입력 하세요"});
     } 
-    //! all validation done for the first view
+    // * all validation done for the first view
     else if(values.code === "test12"){
       setIsValid([isValid[0], true])
     }
   }
 
-  // !useEffect - api call for user signin
+  // * useEffect - api call for user signin
+  // ! dot env
   useEffect( async () => {
     if(goodToGo){
       const userEmail = document.querySelector('.emailDiv').innerText;
-      const newPayload = Object.assign({}, values, { email : userEmail})
-      console.log(newPayload)
-      // createUserHandler( 'users/signup', newPayload);
+      const newPayload = Object.assign({}, values, { email : userEmail});
+      const SERVER = process.env.REACT_APP_SERVER_URL || 'http://localhost:80';
+
       await axios.post(
-        'http://localhost:80/users/signup',
+        SERVER + '/users/signup',
         newPayload,
         { withCredentials : true }
       )
       .then(result => {
-          console.log("then result ========", result);
+          // console.log("then result ========", result);
           dispatch(isShowLoginModalHandler(true));
           dispatch(isShowSignUpModalHandler(false));
       })
@@ -128,12 +127,11 @@ export const useForm = () => {
 
   // all customed state-hook to use 
   return { 
-    isValid, values, errors, codeMsg, toLogin,
+    isValid, values, errors, codeMsg, toLogin, pattern,
     handleInputChange, handleRadioChange, handleSubmit,
     handleKeyPress, emailValidation, codeValidation, 
   }
 }
-
 
 // Actual signup validation! 
 export const validationInfo = (values) => {

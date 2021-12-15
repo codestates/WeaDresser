@@ -1,81 +1,18 @@
-import { InputContainer, InputContainer2, } from './SignupStyle';
-import styled from 'styled-components';
-import { animated } from '@react-spring/web'
-import { useForm, validationInfo } from './useForm';
+import { FormContainer, InputContainer2, EmailDiv, ErrP, RadioContainer} from './SignupStyle';
+import { useForm } from '../../../utils/useForm';
 import { useSpring } from '@react-spring/core';
-
-const FormContainer = styled(animated.div)`
-  width: 40em;
-  padding-top: 5em;
-  background-color: transparent;
-  text-align: center;
-  /* border: 1px solid coral; */
-  button{
-    width: 8em;
-    font-size: 1.6em;
-    padding: 0.5em 0.3em;
-    color: #fff;
-    border: .5px solid #fff;
-    border-radius: 5px; 
-    margin-bottom: 1.6em;
-    &:hover{
-      color:black;
-      background-color: #fff;
-    }
-    @media screen and (max-width : 767px){
-      width: 6em;
-      font-size: 1.4em;
-      padding: 0.4em 0.2em;
-      color: #fff;
-      border: .5px solid #fff;
-      border-radius: 5px; 
-    }
-  };
-
-`;
-const EmailDiv = styled(animated.div)`
-  width : 30em; height: 2em;
-  margin: 0 center;
-  margin-top: 5em;
-  text-align: center;
-  font-size: 2.2em;
-  color: #fff;
-  @media screen and (max-width : 767px){
-    font-size: 1.8em;
-    margin-top: 3.8em;
-  }
-`;
-const ErrP  = styled.p`
-  width: 100%;
-  font-size:1.3em;
-  color: red;
-  opacity: 0.7;
-`;
-
-const RadioContainer =styled.div`
-  width: 32em;
-  margin: 2.2em auto;
-  input{
-    width: 3.4em;
-    background-color:coral;
-  margin: 1.5em auto;
-  }
-  span{
-    font-size:1.5em;
-    color: #ffffff;
-  }
-`;
 
 const SignForm = ({ isValid, email }) => {
   const{ 
-    values, errors, gender,
+    values, errors,
     handleInputChange, handleKeyPress, 
     handleRadioChange , handleSubmit} = useForm()
-    // Translate animation by useSpring 
-    const slidUp = useSpring({
-      transform: isValid[0] && isValid[1]? 'translateY(0%)' : 'translateY(100%)',
-      opacity : isValid[0] && isValid[1] ? 1 : 0 
-    });
+
+  const slidUp = useSpring({
+    transform: isValid[0] && isValid[1]? 'translateY(0%)' : 'translateY(100%)',
+    opacity : isValid[0] && isValid[1] ? 1 : 0 
+  });
+  
   return(
     <>
     { isValid[0] && isValid[1] ? <EmailDiv className='emailDiv' style={slidUp}>{email}</EmailDiv> : null }
@@ -118,12 +55,12 @@ const SignForm = ({ isValid, email }) => {
         { errors.password && <ErrP >{errors.password}</ErrP>} 
         <RadioContainer>
             <label>
-              <input type="radio" value= 'male' checked={values.gender == 'male'}
+              <input type="radio" value= 'male' checked={values.gender === 'male'}
                     onChange={handleRadioChange} />
               <span>Male</span>
             </label>
             <label>
-              <input type="radio" value='female' checked={values.gender == 'female'}
+              <input type="radio" value='female' checked={values.gender === 'female'}
                     onChange={handleRadioChange} 
                     />
               <span>Female</span>

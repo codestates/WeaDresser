@@ -2,6 +2,21 @@ import styled from "styled-components"
 import { FiArrowLeftCircle } from 'react-icons/fi'
 import { animated } from "@react-spring/web";
 
+
+export const SignupBackModal = styled.div`
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.6);
+  position:absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index : 1;
+`;
+
+
 export const LogoContainer =styled.div`
   width: 25rem; 
   height: 20rem;
@@ -178,6 +193,69 @@ export const BackContainer = styled(ErrPtag)`
   }
   p{
     color: #fff;
+  }
+`;
+
+export const FormContainer = styled(animated.div)`
+  width: 40em;
+  padding-top: 5em;
+  background-color: transparent;
+  text-align: center;
+  /* border: 1px solid coral; */
+  button{
+    width: 8em;
+    font-size: 1.6em;
+    padding: 0.5em 0.3em;
+    color: #fff;
+    border: .5px solid #fff;
+    border-radius: 5px; 
+    margin-bottom: 1.6em;
+    &:hover{
+      color:black;
+      background-color: #fff;
+    }
+    @media screen and (max-width : 767px){
+      width: 6em;
+      font-size: 1.4em;
+      padding: 0.4em 0.2em;
+      color: #fff;
+      border: .5px solid #fff;
+      border-radius: 5px; 
+    }
+  };
+
+`;
+export const EmailDiv = styled(animated.div)`
+  width : 30em; height: 2em;
+  margin: 0 center;
+  margin-top: 5em;
+  text-align: center;
+  font-size: 2.2em;
+  color: #fff;
+  @media screen and (max-width : 767px){
+    font-size: 1.8em;
+    margin-top: 3.8em;
+  }
+`;
+
+export const ErrP  = styled.p`
+  width: 100%;
+  font-size:1.3em;
+  color: red;
+  opacity: 0.7;
+`;
+
+export const RadioContainer =styled.div`
+  width: 32em;
+  margin: 2.2em auto;
+  input{
+    width: 3.4em;
+    background-color:coral;
+  margin: 1.5em auto;
+  }
+  span{
+    font-size:1.5em;
+    color: #ffffff;
   }
 `;
 

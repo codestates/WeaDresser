@@ -1,57 +1,50 @@
 import  SignForm  from './SignForm'
-import { useForm }  from'./useForm';
-import { useState } from 'react';
-import { useSpring } from 'react-spring'
 import title from './title.svg'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSpring } from 'react-spring'
+import { useDispatch } from 'react-redux';
+import { useForm }  from'../../../utils/useForm';
 import { isShowLoginModalHandler, isShowSignUpModalHandler,} from '../../../redux/actions/actions'
 import { LogoContainer,InputContainer,InputButton, BackButton, ErrPtag, BackContainer,} from './SignupStyle';
 import { CloseModalButton } from './ModalStyle';
 import { useEffect } from 'react';
+import { LoginContainer } from './LoginStyle';
 
-function Signup({ closeModalByBtn }){
-  const { isShowLoginModal, isShowSignUpModal } = useSelector(state => state.isShowModalReducer)
-  const [ stopClxModal, setStopClxModal ] = useState(true);
+function Signup({ closeModalByBtn, displaySignup }){
+  // const { isShowLoginModal, isShowSignUpModal } = useSelector(state => state.isShowModalReducer)
   const dispatch = useDispatch(); 
-  const 
-  { handleInputChange, 
-    handleKeyPress, 
-    emailValidation,
-    codeValidation,
-    values, errors, isValid, codeMsg, toLogin
-  } = useForm();
+  const { 
+    handleInputChange, handleKeyPress, 
+    emailValidation, codeValidation,
+    values, errors, isValid, codeMsg, toLogin } = useForm();
 
-  // Translate animation by useSpring 
+  // email slide off 
   const displayOff = useSpring({
     transform: !isValid[0] ? 'translateY(0%)' : 'translateY(100%)',
     opacity : !isValid[0] ? 1 : 0 
   });
-  // Translate animation by useSpring 
+  // code slide on
   const displayOn = useSpring({
     transform: isValid[0] ? 'translateY(0%)' : 'translateY(100%)',
     opacity : isValid[0] ? 1 : 0 
   });
+
   // back to login modal handler 
   const backModalHandler = () => {
     dispatch(isShowLoginModalHandler(true));
     dispatch(isShowSignUpModalHandler(false));
   }
-  // Prohibit to clx by backdrop 
-  useEffect(()=> {
-    console.log(stopClxModal)
-    console.log(isShowLoginModal)
-    console.log(isShowSignUpModal)
-
-    if(stopClxModal){
-      dispatch(isShowSignUpModalHandler(true))
-    }
-  },[stopClxModal])
+  // * clos only by closModalByBtn
+  useEffect(() => {
+    dispatch(isShowSignUpModalHandler(true))
+  }, [dispatch])
 
   return (
-  <> { !isValid[0] && !isValid[1] ? <BackButton onClick={backModalHandler}/> : null}
+  <LoginContainer style={displaySignup}>
+  {/* <SignupBackModal></SignupBackModal> */}
+    { !isValid[0] && !isValid[1] ? <BackButton onClick={backModalHandler}/> : null}
     <CloseModalButton onClick={closeModalByBtn}/>
     { isValid[0] && isValid[1] ? null : 
-      <LogoContainer><img alter="" src={title}/></LogoContainer>
+      <LogoContainer><img alt="WEADRESSER" src={title}/></LogoContainer>
     }
       { isValid[0]  ? null : 
       <>
@@ -71,19 +64,20 @@ function Signup({ closeModalByBtn }){
         <InputButton onClick={emailValidation}>이메일 인증</InputButton>
       </>
       }
-      { !isValid[0]|| isValid[0]&& isValid[1] ? null :<>
-      <InputContainer style={displayOn} width = {'35em'}>
-        <input 
-          className="signup-input"
-          type="text"
-          name='code'
-          placeholder="Code"
-          onKeyUp= { handleKeyPress }
-          onChange={ handleInputChange }
-          value={values.code}
-          />
-      </InputContainer>
-        <InputButton onClick={codeValidation}>코드 인증</InputButton>
+      { !isValid[0]|| (isValid[0]&& isValid[1]) ? null : 
+      <>
+        <InputContainer style={displayOn} width = {'35em'}>
+          <input 
+            className="signup-input"
+            type="text"
+            name='code'
+            placeholder="Code"
+            onKeyUp= { handleKeyPress }
+            onChange={ handleInputChange }
+            value={values.code}
+            />
+        </InputContainer>
+          <InputButton onClick={codeValidation}>코드 인증</InputButton>
       </>
       }
       { errors.on && <ErrPtag>{errors.msg}</ErrPtag>}
@@ -103,11 +97,8 @@ function Signup({ closeModalByBtn }){
         </BackContainer>
       </> 
       }
-      { isValid[0] && isValid[1] ? 
-        <SignForm isValid={isValid}  email = {values.email} /> 
-        : null
-      }
-  </>
+      { (isValid[0] && isValid[1]) && <SignForm isValid={isValid}  email = {values.email} /> }
+  </LoginContainer>
   );
 }
 

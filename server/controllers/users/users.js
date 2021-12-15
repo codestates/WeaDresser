@@ -22,8 +22,10 @@ module.exports = {
     if(found) 
       return res.status(203).send("User found by email")
 
-    sendEmailCode(res, email)
-    return res.status(200).send("request on valid");
+    const code = Math.floor(Math.random() * (1000000 - 100000) + 100000);
+    sendEmailCode(res, email,code)
+      ? res.status(200).json({ code : code })
+      : res.status(403).send("failed to send email")
   },
 
   // *  GET users/email?:code

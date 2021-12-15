@@ -1,6 +1,7 @@
 const multer = require("multer");
 const { isAuthorized } = require("./tokenfunction/index");
 const { User, Diarie, Hashtag } = require("../models");
+const { Cloud9 } = require("aws-sdk");
 
 module.exports = {
   // * POST  /record
@@ -11,17 +12,19 @@ module.exports = {
     //     formData.append('hashtag', inputHashtag);
     //     formData.append('share', sharePost);
 
-    const { userId, content, hashtag, share, tempMin, tempMax, temp } =
-      req.body;
-    const userInfo = isAuthorized(req);
-    const validUser = await isValid(userInfo.email, userInfo.id);
-    if (!validUser) {
-      return res.status(404).json("not authorized!");
+    const { content, hashtag, share, weatherData } = req.body;
+    const accessTokenData = isAuthorized(req);
+
+    if (!content || !share || !temp || !tempMax || tempMin) {
+      res.status(400).json({ message: "input values" });
     }
-    const insertTag = hashtag.map((ele) => {
-      let obj = { name: ele };
-      return obj;
-    });
+    if (!accessTokenData) {
+      res.status(401).json({ message: "unauthorized" });
+    }
+    // const insertTag = hashtag.map((ele) => {
+    //   let obj = { name: ele };
+    //   return obj;
+    // });
 
     const data = await Diarie.findOne({ where: { userId } });
     if (!data) {
@@ -33,17 +36,26 @@ module.exports = {
           img = req.file.location;
         }
         const imageInfo = await Diarie.create({
+          likeCounts: 1,
+          weather: "cloud",
+          userId,
           content,
           share,
-          tempMax,
-          tempMax,
-          temp,
+          tempMin: 0,
+          tempMax: 0,
+          temp: 0,
           image: img,
-        }).then(async (created) => {
-          if (insertTag.length !== 0) {
-            await Hashtag.bulkCreate(insertTag, { returning: true });
-          }
-        });
+        })
+          .then(async (created) => {
+            if (insertTag.length !== 0) {
+              await Hashtag.bulkCreate(insertTag, { returning: true });
+            }
+            res.status(201).send();
+          })
+
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }
   },

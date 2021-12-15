@@ -1,8 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const recordController = require('../controllers/record')
-
+const recordController = require("../controllers/record");
+const { upload } = require("../untill/multer");
 // * Post  /record
-router.post('/', recordController.create);
+
+router.post("/", upload.single("image"), recordController.create);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const https = require("https");
-const session = require('express-session');
+const session = require("express-session");
 const indexRouter = require("./routers");
 const cookieParser = require("cookie-parser");
 //require("./models");
@@ -11,8 +11,8 @@ const cookieParser = require("cookie-parser");
 
 // const port = process.env.HTTP_PORT || 4000;
 const PORT = 80;
-const client = `${process.env.CLIENT_URL}` 
-const test = `https://localhost:3000`
+//const client = `${process.env.CLIENT_URL}`
+const test = `https://localhost:3000`;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(
@@ -25,7 +25,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: 'https://localhost:3000', 
+    origin: "https://localhost:3000",
+    // origin : true,
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"],
   })
