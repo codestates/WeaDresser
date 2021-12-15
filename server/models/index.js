@@ -68,26 +68,23 @@ Like.belongsTo(Diarie, {
   sourceKey: "id",
 });
 
-// // * Diarie  N: M  Hashtag
-// // Diarie 1 : N  DiariesHashtag
-// Diarie.hasMany(DiariesHashtag, { foreignKey: "diariesId", sourceKey: "id" });
-// DiariesHashtag.belongsTo(Diarie, {
-//   foreignKey: "diariesId",
-//   as: "H",
-//   onDelete: "cascade",
-//   sourceKey: "id",
-// });
+// * Diarie  N: M  Hashtag
+// Diarie 1 : N  DiariesHashtag
+Diarie.hasMany(DiariesHashtag, { foreignKey: "diariesId", sourceKey: "id" });
+DiariesHashtag.belongsTo(Diarie, {
+  foreignKey: "diariesId",
+  as: "H",
+  onDelete: "cascade",
+  sourceKey: "id",
+});
 
-// // Hashtag 1 : N  DiariesHashtag
-// Hashtag.hasMany(DiariesHashtag, { foreignKey: "hashtagsId", sourceKey: "id" });
-// DiariesHashtag.belongsTo(Hashtag, {
-//   foreignKey: "hashtagsId",
-//   onDelete: "cascade",
-//   sourceKey: "id",
-// });
-
-Diarie.belongsToMany(Hashtag, { through: 'Diarieshashtags' });
-Hashtag.belongsToMany(Diarie, { through: 'Diarieshashtags' });
+// Hashtag 1 : N  DiariesHashtag
+Hashtag.hasMany(DiariesHashtag, { foreignKey: "hashtagsId", sourceKey: "id" });
+DiariesHashtag.belongsTo(Hashtag, {
+  foreignKey: "hashtagsId",
+  onDelete: "cascade",
+  sourceKey: "id",
+});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
