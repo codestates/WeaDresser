@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1037.0",
+    "aws-sdk": "^2.1046.0",
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",

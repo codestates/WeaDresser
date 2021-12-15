@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const https = require("https");
-const session = require('express-session');
+const session = require("express-session");
 const indexRouter = require("./routers");
 const cookieParser = require("cookie-parser");
 //require("./models");
@@ -12,8 +12,8 @@ const cookieParser = require("cookie-parser");
 
 // const port = process.env.HTTP_PORT || 4000;
 const PORT = 80;
-const client = `${process.env.CLIENT_URL}` 
-const test = `https://localhost:3000`
+const client = `${process.env.CLIENT_URL}`;
+const test = `https://localhost:3000`;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(
@@ -26,8 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['https://localhost:3000'],
-    // origin : true, 
+    origin: client,
+    // origin : true,
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"],
   })
@@ -53,15 +53,13 @@ app.get("/check", (req, res) => {
 // else{
 
 let server;
-if(fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")){
-
+if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
   const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
   const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
   const credentials = { key: privateKey, cert: certificate };
 
   server = https.createServer(credentials, app);
   server.listen(PORT, () => console.log("httpss server runnning"));
-
 } else {
-  server = app.listen(PORT, () => console.log("http server running"))
+  server = app.listen(PORT, () => console.log("http server running"));
 }
