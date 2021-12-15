@@ -1,44 +1,44 @@
 const { Diarie, DiariesHashtag, Hashtag } = require("../../models");
-const { isAuthorized } = require("../tokenfunction/index");
+const { isAuthorized, isValid } = require("../tokenfunction/index");
 
 module.exports = {
   // * GET mypage/diary
   findOne: async (req, res) => {
-    // const { id } = req.params;
-    // const createdAt = req.body;
-    // const accessToken = isAuthorized(req);
-    // if (!accessToken) {
-    //   return res.status(401).send("not authorized");
-    // }
-    // try {
-    //   const create = await Diarie.findAll({
-    //     order: [["createdAt", "DESC"]],
-    //   });
-    //   if (createdAt === create) {
-    //     const data = await Diarie.findOne({
-    //       where: {
-    //         id,
-    //       },
-    //       include: [
-    //         {
-    //           model: DiariesHashtag,
-    //           as: "H",
-    //           attributes: ["hashtagsId"],
-    //         },
-    //       ],
-    //     });
-    //     res.status(200).send({
-    //       contnet: data.contnet,
-    //       image: data.image,
-    //       weather: data.weather,
-    //       tempMin: data.tempMin,
-    //       temMax: data.tempMax,
-    //       hashtag: data.ashtagsId,
-    //     });
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    const createdAt = req.query;
+    const accessToken = isAuthorized(req);
+    const validUser = await isValid(accessToken.email, accessToken.id);
+    if(!validUser){
+      return res.status(401).json("not authorized!");
+    }
+    try {
+      const create = await Diarie.findAll({
+        order: [["createdAt", "DESC"]],
+      });
+      if (createdAt === create) {
+        const data = await Diarie.findOne({
+          where: {
+            id,
+          },
+          include: [
+            {
+              model: DiariesHashtag,
+              as: "H",
+              attributes: ["hashtagsId"],
+            },
+          ],
+        });
+        res.status(200).send({
+          contnet: data.contnet,
+          image: data.image,
+          weather: data.weather,
+          tempMin: data.tempMin,
+          temMax: data.tempMax,
+          hashtag: data.hashtagsId,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   },
   // * GET  mypage/diary:createdAt
   findOnebyDate: async (req, res) => {

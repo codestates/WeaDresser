@@ -37,7 +37,7 @@ export const ModalContainer = styled(animated.div)`
     width: 28rem;
     height: 35rem;
   }
-`;
+  `;
 
 export const CloseModalButton = styled(MdClose)`
   width: 2.5rem; height: 2.5rem;
@@ -52,5 +52,14 @@ export const CloseModalButton = styled(MdClose)`
     cursor: pointer; 
     color:coral;
   }
-`;
+  @media screen and (max-width : 767px){
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+  @media screen and (max-width : 424px){
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  `;
 

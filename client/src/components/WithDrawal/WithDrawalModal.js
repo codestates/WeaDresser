@@ -21,10 +21,33 @@ const WithDrawalModalContainer = styled.div`
     left: 50%;
     z-index: 1001;
     transform: translate(-50%, -50%);
-    width: 550px;
+    width: 285px;
+    height: 16em;
     background: #fff;
-    padding: 20px 80px;
     box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0 6px 4px 0 rgba(0, 0, 0, 0.1);
+    >p{
+        font-size: 1.2em;
+        text-align: center;
+        margin: 4em 0 4em;
+    }
+    >div{
+        width: 80%;
+        height: 30px;
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-between;
+        button{
+            border-radius: 4px;
+            color: #fff;
+            width: 40%;
+            background: #7f838e;
+        }
+        .update-modal-close-btn{
+            background: #2862e5;
+        }
+    }
 `
 const WithDrawalModalBtn = styled.div`
 
@@ -41,12 +64,14 @@ function UpdateModal({setShowWithDrawal}) {
     }
     function withDrawalRequest(e){
         e.preventDefault();
-        axios.delete('http://localhost:80/mypage/users', {headers: {authorization: `Bearer ${userData}`, withCredentials : true}})
+        axios.delete('http://localhost:80/mypage/users', { withCredentials : true})
         .then(res => {
             dispatch(loginSuccessHandler(false, ''));
             history.push('/')
+            window.sessionStorage.removeItem('isLogin');
          })
          .catch(err => {
+            //  안됐을때 창 띄우기 귀찮음
         })
     }
 
@@ -55,12 +80,14 @@ function UpdateModal({setShowWithDrawal}) {
             <WithDrawalModalBackground></WithDrawalModalBackground>
             <WithDrawalModalContainer>
                 <p>회원 탈퇴를 하시겠습니까?</p>
-                <button onClick={(e) => withDrawalRequest(e)}>
-                    확인
-                </button>
-                <button className="update-modal-close-btn" onClick={(e) =>closeCondition(e)}>
-                    취소
-                </button>
+                <div>
+                    <button onClick={(e) => withDrawalRequest(e)}>
+                        네
+                    </button>
+                    <button className="update-modal-close-btn" onClick={(e) =>closeCondition(e)}>
+                        아니오
+                    </button>
+                </div>
             </WithDrawalModalContainer>
         </>
     )

@@ -76,7 +76,7 @@ export const InputContainer = styled(animated.div)`
     }
     &::placeholder{
       color: #fff;
-      font-size:.8em;
+      font-size:1em;
     }
     &::placeholder:hover{
       opacity: 0;
@@ -87,23 +87,25 @@ export const InputContainer = styled(animated.div)`
       height: 2em;
       margin-top: 0.2rem;
       font-size: 1.6rem
+      
     }
     @media screen and (max-width : 424px){
-      width: 16rem;
+      width: 16em;
+      margin-left: 5em;
       height: 1.2rem;
-      margin-top: 0.2rem;
-      font-size: 1rem;
+      padding: 0.2em;
+      font-size: 1.2rem;
     }
   }
 `;
 
 export const InputButton = styled.div`
-    width: 7em;
-    padding: 0.6em 0.3em;
+    width: 8em;
+    padding: 0.5em 0.3em;
     margin-left:1.5em;
-    margin-top: 2em;
+    margin-top: 1.5em;
     color: #fff;
-    font-size: 1.3em;
+    font-size: 1.5em;
     display: inline-block;
     text-align: center;
     cursor:pointer;
@@ -115,13 +117,14 @@ export const InputButton = styled.div`
       width: 6.5em;
       font-size: 1.1em;
       padding: 0.5em 0.4em;
-      margin-top: 2.5em;
+      margin-top: 1.5em;
       margin: 1.5em auto;
     }
     @media screen and (max-width : 424px){
-      width: 4em;
-      font-size: 1.3em;
-      padding: 0.5em 0.2em;
+      width: 5em;
+      margin: 0 auto;
+      font-size: 1em;
+      padding: 0.4em 0.2em;
 
     }
 
@@ -129,8 +132,25 @@ export const InputButton = styled.div`
 
 export const InputContainer2 = styled(InputContainer)`
   margin : 1em auto;
-  width: 25em;
-  font-size:1.2rem;
+  width: 32em;
+  margin-bottom: 1.8em;  
+  /* border : 1px solid coral;  */
+  input{
+    font-size:1.8em;
+    width : 30em;
+    margin: 1em auto;
+    @media screen and (max-width : 767px){
+      margin : .8em auto;
+      width : 20em;
+      font-size: 1.2em;
+    }
+    @media screen and (max-width : 424px){
+        margin: .2em auto;
+        width : 15em;
+        /* border: 1px solid coral; */
+        font-size: .8em;
+      }
+  }
   @media screen and (max-width : 767px){
     margin : .8em auto;
     width : 20em;
@@ -149,6 +169,7 @@ export const ErrPtag = styled.div`
   text-align: center;
   margin-top: ${({ margin }) => margin|| '1.8em'}; // responsive 
   font-size: ${({ size }) => size||'1.8em'};
+  animation: smoothAppear 1s;
   @media screen and (max-width : 767px){
     /* height: 1.8em; */
     width: ${({width}) => width || '18em'};
@@ -161,9 +182,19 @@ export const ErrPtag = styled.div`
     /* height: 1.2rem; */
     width: ${({width}) => width || '18em'};
     height: ${({height}) => height || '1em'};
-    margin-top: ${({ margin }) => margin|| '0.5em'}; // responsive 
+    margin-top: ${({ margin }) => margin|| '1.5em'}; // responsive 
     font-size: 1.3rem;
   }
+  @keyframes smoothAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 `;
 
 export const BackButton = styled(FiArrowLeftCircle)`
@@ -178,6 +209,13 @@ export const BackButton = styled(FiArrowLeftCircle)`
   &:hover{
     cursor: pointer; 
     color:coral;
+  }
+  @media screen and (max-width : 767px){
+    width: 2.5rem; height: 2.5rem;
+  
+  }
+  @media screen and (max-width : 424px){
+    width: 1.5rem; height: 1.5rem;
   }
 `;
 
@@ -194,6 +232,7 @@ export const BackContainer = styled(ErrPtag)`
   p{
     color: #fff;
   }
+
 `;
 
 export const FormContainer = styled(animated.div)`
@@ -201,7 +240,6 @@ export const FormContainer = styled(animated.div)`
   padding-top: 5em;
   background-color: transparent;
   text-align: center;
-  /* border: 1px solid coral; */
   button{
     width: 8em;
     font-size: 1.6em;
@@ -222,19 +260,39 @@ export const FormContainer = styled(animated.div)`
       border: .5px solid #fff;
       border-radius: 5px; 
     }
+    @media screen and (max-width : 424px){
+      margin: 0 auto;
+      margin-bottom: 10em;
+      width: 5em;
+      font-size: 1em;
+      color: #fff;
+      border: .5px solid #fff;
+      border-radius: 5px; 
+    }
   };
+  @media screen and (max-width : 767px){
+  }
+  @media screen and (max-width : 424px){
+    margin: 0 auto;
+    padding-top: 1em;
+  }
 
 `;
 export const EmailDiv = styled(animated.div)`
   width : 30em; height: 2em;
   margin: 0 center;
-  margin-top: 5em;
+  margin-top: 4em;
+  margin-bottom: 1em;
   text-align: center;
-  font-size: 2.2em;
+  font-size: 2.4em;
   color: #fff;
   @media screen and (max-width : 767px){
-    font-size: 1.8em;
-    margin-top: 3.8em;
+    font-size: 2em;
+    margin-top: 3.5em;
+  }
+  @media screen and (max-width : 424px){
+    font-size: 1.7em;
+    margin-top: 3em;
   }
 `;
 
@@ -248,15 +306,24 @@ export const ErrP  = styled.p`
 export const RadioContainer =styled.div`
   width: 32em;
   margin: 2.2em auto;
+  /* border: 1px solid coral; */
   input{
     width: 3.4em;
-    background-color:coral;
   margin: 1.5em auto;
   }
   span{
     font-size:1.5em;
     color: #ffffff;
   }
+  @media screen and (max-width : 767px){
+  }
+  @media screen and (max-width : 424px){
+    margin: 0 auto;
+    margin-bottom: .8em;
+    width: 20em;
+    font-size: .8em;
+  }
+
 `;
 
 

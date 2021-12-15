@@ -21,6 +21,7 @@ export const useForm = () => {
   const [toLogin, setToLogin] = useState({ on: false }) // back to login component
   const [goodToGo, setGoodToGo] = useState(false); // * good to call api request!
   const [payload, setPayload] = useState({}); 
+  // const [code, setCode] = useState(null)
   // Since the email component disappeared, has to save it as state value to payload 
   const pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
@@ -64,14 +65,19 @@ export const useForm = () => {
       setErrors({ on : true, msg :"이메일 형식을 확인해 주세요"})
     }
     else{ // email validation => API server request
-      const resultStatus = await getEmailValidation('users/email', values.email)
+      const result = await getEmailValidation('/users/email', values.email)
+      const resultStatus = result.status;
       // console.log(resultStatus);
       if( resultStatus === 200 ){
         const { email } = values ;
         //! the moment to save email on payload 
         if( email ) setPayload({ email })
+        console.log(result)
+        // setCode(result.data.code)
+        sessionStorage.setItem('code', result.data.code)
         setErrors({ on : true, msg :"이메일 인증을 완료해 주세요" });
         setIsValid([true, isValid[1]]); // done with email valid 
+
       }
       else if ( resultStatus === 203 ){
         setIsValid([false, isValid[1]]); 
@@ -86,12 +92,14 @@ export const useForm = () => {
   }
   // Code validation - second Validation  
   const codeValidation = () => {
-    if(!values.code || values.code.length !== 6){
+    const code = sessionStorage.getItem('code');
+    if(!values.code || values.code.length !== 6 || values.code.length < 6){
       setErrors({ on:true, msg :"6자리 인증 코드를 입력 하세요"});
     } 
     // * all validation done for the first view
-    else if(values.code === "test12"){
+    else if(code && values.code === code ){
       setIsValid([isValid[0], true])
+      sessionStorage.removeItem('code');
     }
   }
 

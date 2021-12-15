@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const NavContaier = styled.nav`
     width:100vw;
@@ -12,7 +11,12 @@ export const NavContaier = styled.nav`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9999999;
+    z-index: 9;
+    flex-wrap: wrap;
+    >div{display: flex; width: 33.333%}
+    >div:first-child{justify-content: flex-start}
+    >div:nth-child(2){justify-content: center;}
+    >div:nth-child(3){justify-content: flex-end}
 `;
 
 export const NavBtn = styled.button`
@@ -27,5 +31,9 @@ export const NavBtn = styled.button`
     &:hover {
         background: #fff;
         color: #000;
-  }
+    }
+    @media screen and (max-width:700px){
+        padding: 0.35em 1.3em;
+    }
+    @media
 `;

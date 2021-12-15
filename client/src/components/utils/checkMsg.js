@@ -9,10 +9,17 @@ const CheckSingMsgBox = styled.div`
     >div{
         width: 25%;
     }
+    @media screen and (max-width:450px){
+        padding: .5em 1.3em;
+        font-size: .9em;
+    }
 `
 const CheckSingMsgText = styled.p`
     color: rgb(192, 72, 72); font-size: 1.2em;
     width: 70%;
+    @media screen and (max-width:600px){
+            width: calc(100% - 100px);
+    }
 `
 function CheckSignMsg({message}) {
 

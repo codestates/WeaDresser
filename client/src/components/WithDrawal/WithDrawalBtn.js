@@ -1,12 +1,14 @@
-
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
    
 const WithDrawalContainer = styled.button`
     padding: .8em 2em;
-    background: #3c60f0;
+    background: #7f838e;
     color: #fff;
     border-radius: 0.3em;
+    @media screen and (max-width:450px){
+        padding: .5em 1.3em;
+    }
 `
 function WithDrawal({setShowWithDrawal}) {
 

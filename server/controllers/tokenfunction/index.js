@@ -13,10 +13,10 @@ module.exports = {
       httpOnly: true,
       sameSite: "none",
       secure: true,
-      maxAge: 60 * 60 * 24 * 1000,
-      domain: "localhost",
-      path: "/",
-      ovewrite: true,
+      // maxAge: 60 * 60 * 24 * 1000,
+      // domain: "localhost",
+      // path: "/",
+      // ovewrite: true,
       // signed : true
     });
     // res.cookie("Login", "true", {

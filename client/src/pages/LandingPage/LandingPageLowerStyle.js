@@ -7,18 +7,25 @@ export const LowerPageContainer = styled.div`
     position: relative;
 `
 export const LowerPageBox = styled.div`
-    width: 80%;
+    width: 60%;
     position: absolute;
     top: 30%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    @media screen and (max-width:1080px){
+        width: 75%;
+    }
+    @media screen and (max-width:800px){
+        width: 85%;
+    }
 `
 export const UserWore = styled.div`
-    border: 1px solid #000;
+    border: 1px solid #cbcbcb;
     width: 48%;
     position: relative;
+    padding-bottom: 1em;
     &:hover{
         .ootd-list-box-item{
             border-radius: 0;
@@ -33,21 +40,20 @@ export const UserWore = styled.div`
 `
 export const UserWoreImage = styled.div`
     position: relative;
-    border: 1px solid #000;
     background-image: url(${props => props.woreUrl});
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
     height: 30em;
-    margin-bottom: 3em;
+    margin-bottom: 1em;
     cursor: pointer;
 `
 export const UserWoreText = styled.p`
     font-size: 1.3em;
 `
 export const BestDresser = styled.div`
-    border: 1px solid #000;
+    border: 1px solid #cbcbcb;
     width: 48%;
     position: relative;
     &:hover{

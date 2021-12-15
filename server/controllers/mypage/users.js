@@ -18,7 +18,7 @@ module.exports = {
     });
     //console.log(userInfo);
 
-    res.status(200).send({ data: { userName: userInfo.userName } });
+    res.status(200).send({ data: { userName: userInfo.userName, social: userInfo.social } });
   },
   // * PATCH mypage/users
   update: async (req, res) => {

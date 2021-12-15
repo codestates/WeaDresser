@@ -20,7 +20,7 @@ export const LoginContainer = styled(animated.div)`
   }
   @media screen and (max-width : 424px){
     width: 28rem;
-    height: 35rem;
+    height: 38rem;
   }
 `;
 

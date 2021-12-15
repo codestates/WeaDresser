@@ -7,15 +7,46 @@ export const UserInfoBackground = styled.div`
 `
 export const UserInfoContainer = styled.div`
     position: absolute;
-    top: 20em;
+    top: 16em;
     left: 50%;
     transform: translateX(-50%);
-    width: 70em;
+    width: 55%;
+    height:56%;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 0 8em;
+    @media screen and (max-width:1080px){
+        width: 65%;
+        padding: 0 5em;
+    }
+    @media screen and (max-width:800px){
+        width: 72%;
+        padding: 0 4em;
+    }
+    @media screen and (max-width:700px){
+        width: 85%;
+        padding: 0 4em;
+    }
+    @media screen and (max-width:480px){
+        width: 100%;
+        padding: 0 2em;
+    }
 `
 export const UserInfoHeader = styled.div`
     display: flex;
     width: 100%;
+    margin: 6em 0 .5em;
     justify-content: space-between;
+    border-bottom: 1px solid #c4c4c4;
+    padding-bottom: 1.5em;
+    >h2{
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .user-info-name{
+        color: #2862e5;
+    }
 `
 export const UserInfoUpdate = styled.div`
     
@@ -25,27 +56,55 @@ export const UserInfoForm = styled.form`
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    >hr{
+        margin-top: 2.5em;
+        border: none;
+        background: #c4c4c4;
+        width: 100%;
+        height: 1px;
+    }
 `
 export const UserInfoBox = styled.div`
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
+    margin-top: 2em;
     >input{
         width: 70%;
         border: none;
-        border-bottom: 2px solid #666;
+        border: 1px solid #c4c4c4;
         padding: 10px 5px;
         box-sizing: border-box;
         margin-top: 3px;
+        background: #fafafa;
+        color: #17191d;
+        &:focus{
+                outline: none;
+                border: 1px solid #2862e5;
+            }
+        @media screen and (max-width:600px){
+            width: calc(100% - 100px);
+        }
+    }
+    >.user-info-arrange{
+        width: 30%;
+        @media screen and (max-width:600px){
+            width: 100px;
+        }
     }
 `
 export const UserInfoLabel = styled.label`
-    padding-top: .6em;
     box-sizing: border-box;
-    width: 25%;
-    height: auto;
-    text-align: right;
+    width: 30%;
     font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    @media screen and (max-width:800px){
+        font-size: 1.3em;
+    }
+    @media screen and (max-width:600px){
+        width: 100px;
+    }
 `
 
 export const UserInfoNickname = styled.input.attrs(props => ({
@@ -76,15 +135,17 @@ export const UserInfoSubmitBtn = styled.button.attrs(props => ({
     padding: 10px 5px;
     box-sizing: border-box;
     margin-top: 20px;
-    background: #e94b4b;
+    background: #2862e5;
     color: #fff;
     font-size: 15px;
+    border-radius: 4px;
     &:hover{
-        background: #be0000
+        background: #0952e5
     }
     &:disabled{
-        background: #e94b4b;
-        opacity: .8;
+        /* background: rgba(40, 98, 229, 0.6);
+        opacity: .8; */
+        background: #a6a9af;
         cursor: auto;
     }
 `

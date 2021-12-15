@@ -17,10 +17,26 @@ const UpdateModalContainer = styled.div`
     left: 50%;
     z-index: 1001;
     transform: translate(-50%, -50%);
-    width: 550px;
+    width: 285px;
+    height: 16em;
     background: #fff;
-    padding: 20px 80px;
-    box-sizing: border-box
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0 6px 4px 0 rgba(0, 0, 0, 0.1);
+    >p{
+        font-size: 1.2em;
+        text-align: center;
+        margin: 4em 0 4em;
+    }
+    >button{
+        display: block;
+        margin: 0 auto;
+        height: 30px;
+        border-radius: 4px;
+        color: #fff;
+        width: 40%;
+        background: #2862e5;
+    }
 `
 const UpdateModalBtn = styled.div`
 
