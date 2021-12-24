@@ -14,10 +14,8 @@ module.exports = {
       sameSite: "none",
       secure: true,
       maxAge: 60 * 60 * 24 * 1000,
-      // domain: "localhost",
-      // path: "/",
-      // ovewrite: true,
-      // signed : true
+      domain: "weadresser.ml",
+      path: "/"
     });
     // res.cookie("Login", "true", {
     //   httpOnly: true,
@@ -28,9 +26,8 @@ module.exports = {
     //   path: "/",
     //   ovewrite: true,
     //   signed : true
-    // });
-  },
-
+    //
+ },
   isAuthorized: (req) => {
 
     const cookieToken = req.cookies.Bearer;

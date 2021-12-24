@@ -5,6 +5,7 @@ const { findTopLikeById, findLatestById, findRandomOne, findTopLikeOne } = requi
 module.exports = {
   // * GET  /?tempMin={}&tempMax={}
   findRandom : async (req, res) => {
+    console.log("====================================================여기가 endpoint 1")
     const { tempMin, tempMax } = req.query;
     try{
       await sequelize.transaction( async t => { 
@@ -54,7 +55,7 @@ module.exports = {
         delete topData.Hashtags
         delete topData.User
 
-        // console.log(topData)
+        console.log('endpoint1=======================',ranData, topData)
         return res.json([ranData, topData])
       })
     }
@@ -67,8 +68,10 @@ module.exports = {
 
   // * GET  /?tempMax={}&tempMin={}  
   findById : async (req, res) => {
+    console.log("====================================================여기가 endpoint 2")
     // validation 
     const { tempMax, tempMin }= req.query
+    console.log('======================================================',tempMax, tempMin)
     const userInfo = isAuthorized(req);
     const validUser = await isValid(userInfo.email, userInfo.id);
     if(!validUser){
@@ -77,7 +80,6 @@ module.exports = {
     try{
       await sequelize.transaction( async t => { 
         // get Most like diary with username
-        const userId = validUser.id
         const TopOne = await Diarie.findOne({
           where : { 
             temp : { [Op.between] : [ tempMin -5, tempMax + 5 ] },
@@ -85,7 +87,7 @@ module.exports = {
           },
           include : [ 
             { model : User, attributes : ['userName'] },
-            { model : Hashtag, through : {attributes : []} },
+            { model : Hashtag, through : { attributes : [] } },
           ],
           order: [['likeCounts', 'DESC']],
           limit : 1, 
@@ -96,7 +98,7 @@ module.exports = {
         let topData = TopOne.dataValues
         topData.hashtag = topData.Hashtags.map(hash => hash.dataValues.name).join(', ')
         topData.likeWhether = await Like.findOne({ where : 
-          { diarieId : TopOne.id, userId : userId},
+          { diarieId : TopOne.id },
           transaction : t
         }) ? 1 : 0 
 
@@ -107,10 +109,11 @@ module.exports = {
         
         // found user Diary 
         let userData ;
+        const userId = validUser.id
         const UserOne = await Diarie.findOne({
           where : {
-            id : userId, 
-            temp : { [Op.between] : [ tempMin -5, tempMax + 5 ] },
+            userId : userId, 
+            temp : { [Op.between] : [ tempMin -5, tempMax + 5] },
             share : true,
           },
           include : [ 
@@ -122,9 +125,11 @@ module.exports = {
           nest : true,
           transaction : t
         })
+        // console.log("dsafadfasdfasdfasdf=================================================================")              
+
         // if user has diary on that condition where temperature in between tempMin, Max
         if(UserOne){ 
-        // like condition for current user on found diary                
+        // like condition for current user on found diary  
           userData = UserOne.dataValues
           userData.hashtag = userData.Hashtags.map(hash => hash.dataValues.name).join(', ')
           userData.likeWhether = await Like.findOne({ where : 
@@ -165,6 +170,7 @@ module.exports = {
         delete userData.User
         
         // console.log(topData)
+        console.log('endpoint2=======================',userData, topData)
         return res.json([userData, topData])
       })
     }

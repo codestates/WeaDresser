@@ -28,19 +28,21 @@ module.exports = {
         temp : tempArr[idx][0]+ getRandonNumber(0,3), 
         tempMax : tempArr[idx][1], 
         tempMin : tempArr[idx][0],
-        share : getRandonNumber(0,100)%2,
+        share : true,
         userId : userid,
         likeCounts : 0,
       }
     }
     const createUserData = async (userLen) => {
+      const nameArr = ['minch', 'donghk', 'yoonhw', 'younghw','ciara', 'clare', 'Moody', 'Sun', 'Jungmin', 'Dongmin', 
+                      'Yoonmin', 'Keymin', 'Samhwan', 'Sehwan', 'Soo', 'Sea', 'Lay', 'Kasom', 'Siara', 'Suji', 'Leina', ]
       const userData = new Array(userLen).fill(0).map( (ele, idx) => {
         const data =   { 
-          userName : 'dummy user ' +( idx + 1),
+          userName : nameArr[idx],
           email : `abc${idx+1}@email.com`,
           password : `1234`,
           gender : getRandonNumber(0,100)%2 ? 'male' : 'female',
-          social : getRandonNumber(0,100)%2 ,
+          social : false,
         }
         return data
       })

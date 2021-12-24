@@ -26,8 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['https://localhost:3000'],
-    // origin : true, 
+    origin: 'https://www.weadresser.ml',
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"],
   })
@@ -53,4 +52,4 @@ app.get("/check", (req, res) => {
 // else{
 
 
-app.listen(PORT, () => console.log("http server running"))
+app.listen(PORT, () => console.log("https server running"))

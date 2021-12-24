@@ -11,9 +11,9 @@ module.exports = {
     }
     
     const hashLen = 37
-    const diaryLen = 1000;
+    const diaryLen = 486;
 
-    for(let d = 1 ; d < 500; d++){
+    for(let d = 1 ; d < (hashLen*diaryLen)/2; d++){
       let checkDiary = new Array(diaryLen + 1).fill(false);
       const randHashLen = getRandomNumber(0, 20);
       checkDiary[0] = true ;

@@ -27,6 +27,11 @@ module.exports = {
     )
   },
   down: async (queryInterface, DataTypes) => {
-    return queryInterface.dropTable('DiariesHashtags');
+    return queryInterface.dropTable('Diaries
+
+
+
+
+ashtags');
   }
 };

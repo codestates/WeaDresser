@@ -1,4 +1,4 @@
-const { User, Diarie, Like } = require("../../models");
+const { User, Diarie, Like, sequelize } = require("../../models");
 const { isAuthorized } = require("../tokenfunction/index");
 
 module.exports = {
@@ -80,28 +80,30 @@ module.exports = {
   // * DELETE  mypage/users 회원탈퇴
   delete: async (req, res) => {
     const accessTokenData = isAuthorized(req);
-    // console.log(accessTokenData);
-    if (!accessTokenData) {
-      return res.status(401).send("not authorized");
-    }
+    if (!accessTokenData)  return res.status(401).send("not authorized");
     
-    await User.destroy({
-      where: {
-        id: accessTokenData.id,
-      },
-    }).catch((err) => {
-      console.log(err);
-    });
+    try{
+      await sequelize.transaction( async t => { 
+        const user = await User.findByPk(accessTokenData.id, { transaction : t });
+        await user.removeDiaries(await user.getDiaries({ transaction : t }));
+        await user.removeLikes(await user.getLikes({ transaction : t }));
+        await user.destroy({ transaction : t });
 
-    res
-      .clearCookie("authorization", {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-        path: "/",
-        domail: "/",
+        res
+        .clearCookie("Bearer", {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+          path: "/",
+          domain: "weadresser.ml",
+        })
+        .status(200)
+        .send("ok");
       })
-      .status(200)
-      .send("ok");
+    }
+    catch(err){
+      console.log(err)
+      return res.status(500).send("Internal server error")       
+    }
   },
 };
