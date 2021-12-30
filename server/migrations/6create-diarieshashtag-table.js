@@ -2,31 +2,31 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    return  queryInterface.createTable('Diarieshashtags', {
+    return  queryInterface.createTable('DiariesHashtags', {
       diarieId :{
         type : DataTypes.INTEGER,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         references:{
           model : 'Diaries',
           key : 'id',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE',
         },
       },
       hashtagId :{
         type : DataTypes.INTEGER,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         references:{
           model : 'Hashtags',
           key : 'id',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE',
         },
       }
     })
     .then( () => 
-      queryInterface.addIndex('Diarieshashtags', ['diarieId','hashtagId'], { unique : true })
+      queryInterface.addIndex('DiariesHashtags', ['diarieId','hashtagId'], { unique : true })
     )
   },
   down: async (queryInterface, DataTypes) => {
-    return queryInterface.dropTable('Diarieshashtags');
+    return queryInterface.dropTable('DiariesHashtags');
   }
 };

@@ -10,7 +10,7 @@ export const OotdListBoxContainer = styled.div`
 export const OotdListBoxBack = styled.div`
     width: 20%;
     position: absolute;
-    left: 100%;
+    left: calc(100% + 30px);
     box-sizing: border-box;
     padding: 0.3em 0.5em 0.8em 0.5em;
     cursor: pointer;

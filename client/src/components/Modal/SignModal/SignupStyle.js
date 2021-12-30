@@ -86,7 +86,7 @@ export const InputContainer = styled(animated.div)`
       width: ${({ width })=> width || '18em'};
       height: 2em;
       margin-top: 0.2rem;
-      font-size: 1.6rem
+      font-size: 1.8rem
       
     }
     @media screen and (max-width : 424px){
@@ -297,10 +297,26 @@ export const EmailDiv = styled(animated.div)`
 `;
 
 export const ErrP  = styled.p`
-  width: 100%;
-  font-size:1.3em;
-  color: red;
-  opacity: 0.7;
+  width: 80%;
+  font-size:1.5em;
+  background: #fff;
+  margin : 0 auto;
+  color: #DB1200;
+  opacity: 1;
+  padding : 0.1em;
+  border-radius : 5px ;
+  /* border: 1px solid coral */
+  @media screen and (max-width : 767px){
+      margin : .8em auto;
+      width : 18em;
+      font-size: 1.2em;
+    }
+    @media screen and (max-width : 424px){
+      margin: .2em auto;
+      width : 15em;
+      /* border: 1px solid coral; */
+      font-size: .8em;
+    }
 `;
 
 export const RadioContainer =styled.div`

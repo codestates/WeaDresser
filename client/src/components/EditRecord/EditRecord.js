@@ -74,12 +74,13 @@ function EditRecord({ curSlide, setCurSlide, setIsEdit, fetchedDiary, }) {
         formData.append('share', sharePost); 
         formData.append('diaryId', diaryId);
         // const url = process.env.REACT_APP_SERVER_URL || 
-        const url = `http://localhost:80/mypage/diary` // server랑 확인할때 환경변수 x
+        const url = `${process.env.REACT_APP_SERVER_URL}/mypage/diary` // server랑 확인할때 환경변수 x
         axios.patch(url, formData, { withCredentials: true})
             .then(res => console.log('edit successfully'))
+            .then(() =>{
+                window.location.reload();
+            })
             .catch(err => console.log(err))
-
-        window.location.reload();
     }
 
     function cancelEdit (e) {

@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useRef } from 'react'
+import { useSelector, } from 'react-redux';
 import { useHistory } from 'react-router';
 // import { FileUploader } from "react-drag-drop-files";
 import axios from 'axios';
@@ -27,13 +27,13 @@ function RecordPage() {
     const [inputContent, setInputContent] = useState('');
     const [inputHashtag, setInputHashtag] = useState('');
     const [previewImage, setPreviewImage] = useState(null);
-    const [curWeather, setCurWeather] = useState(weatherData.weather[0].main);
-    const [curTempMin, setCurTempMin] = useState(weatherData.main.temp_min);
-    const [curTempMax, setCurTempMax] = useState(weatherData.main.temp_max);
-    const [curTemp, setCurTemp] = useState(weatherData.main.temp);
     const [sharePost, setSharePost] = useState(true);
     const [canSubmit, setCanSubmit] = useState(false);
     const [showCancel, setShowCancel] = useState(false);
+    const curWeather = weatherData.weather[0].main
+    const curTempMin = weatherData.main.temp_min;
+    const curTempMax = weatherData.main.temp_max;
+    const curTemp = weatherData.main.temp;
 
     function inputFileHandler (inputValue) {
         
@@ -92,28 +92,20 @@ function RecordPage() {
         formData.append('hashtag', inputHashtag);
         formData.append('share', sharePost);
         formData.append('weather', curWeather);
-        formData.append('tempMin', curTempMin);
-        formData.append('tempMax', curTempMax);
+        formData.append('tempMin', Math.round(curTempMin * 10 / 10).toFixed(1));
+        formData.append('tempMax', Math.round(curTempMax * 10 / 10).toFixed(1));
         formData.append('temp', curTemp);
-        // const payload = {
-        //     image: 'hello world',
-        //     content: inputContent,
-        //     hashtag: inputHashtag,
-        //     share: sharePost,
-        //     weather: curWeather,
-        //     tempMin: curTempMin,
-        //     tempMax: curTempMax,
-        //     temp: curTemp
-        // }
+
         // const url = process.env.REACT_APP_SERVER_URL || 
-        const url = 'http://localhost:80/diary' // server랑 확인할때 환경변수 x
-        axios.post('http://localhost:80/diary', formData, { withCredentials: true})
-            .then(res => console.log('submit successfully')).then((res => history.push('/mypage')))
+        // const url = `${process.env.REACT_APP_SERVER_URL}` || 'http://localhost:80'
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/diary`, formData, { withCredentials: true})
+            .then(res => console.log('submit successfully'))
+            .then(() => history.push('/mypage'))
             .catch(err => console.log('error!!', err));
 
         //     history -> diary페이지 -> 다시 get요청 (가장 최신 글)
     }
-    function cancelFn (e) { // formData 초기화
+    function cancelFn (e) { // formData 초기화 // 어쩌면 초기화 해줄 필요가 없을지도? 입력된게 없을테니까?
         e.preventDefault();
         formData.delete('image');
         formData.delete('content');

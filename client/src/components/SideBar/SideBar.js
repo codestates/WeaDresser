@@ -110,13 +110,11 @@ function SideBar({position, top, left, display}) {
         let sideBarMenu = document.querySelector('.side-bar-menu');
         if(isShowSideBar === true){
             sideBarSpreadHandler(false)
-            // sideBarBtn.children[0].style.transform="rotate(0)";
             sideBarBtn.children[0].style.top="0px";
             sideBarBtn.children[1].style.left="0px";
-            // sideBarBtn.children[2].style.transform="rotate(0)";
-            sideBarBtn.children[2].style.top="calc(100% - 2px)"
-            sideBarMenu.style.transition = "all .3s";
+            sideBarMenu.style.transition = "height .3s";
             sideBarMenu.style.height = "0px";
+            sideBarMenu.style.border = "none";
         }
     }
 

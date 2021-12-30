@@ -1,4 +1,5 @@
 import {
+    OotdListBack,
     OotdPageContainer,
     OotdPageTitle,
     OotdListContainer,
@@ -9,12 +10,14 @@ function OotdListPage(){
 
 
     return (
-        <OotdPageContainer>
-            <OotdPageTitle>OOTD LIST</OotdPageTitle> {/* 이름 뭐로 바꿀지.. */}
-            <OotdListContainer>
-                <OdtdListBox />
-            </OotdListContainer>
-        </OotdPageContainer>
+        <OotdListBack>
+            <OotdPageContainer>
+                <OotdPageTitle>OOTD LIST</OotdPageTitle> {/* 이름 뭐로 바꿀지.. */}
+                <OotdListContainer>
+                    <OdtdListBox />
+                </OotdListContainer>
+            </OotdPageContainer>
+        </OotdListBack>
     )
 }
 

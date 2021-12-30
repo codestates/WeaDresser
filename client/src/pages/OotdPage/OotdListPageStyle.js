@@ -1,11 +1,15 @@
 import styled from "styled-components";
+export const OotdListBack = styled.div`
+    width: 100%;
+    background-color: rgb(236, 234, 245);
+`
 
 export const OotdPageContainer = styled.div`
     width: 100%;
     min-height: 100vh;
     height: fit-content;
     box-sizing: border-box;
-    width: 1775px;
+    width: 1800px;
     margin: 0 auto;
     overflow: hidden;
     @media screen and (max-width:1800px){

@@ -9,23 +9,21 @@ module.exports = {
         type: DataTypes.INTEGER
       },
       userId : {
-        // allowNull: false,
         type: DataTypes.INTEGER,
-        references:{
-          model : 'Users',
-          key : 'id',
           onDelete: 'CASCADE',
           onUpdate: 'CASCADE',
+          references:{
+          model : 'Users',
+          key : 'id',
         },
       },
       diarieId : {
-        // allowNull: false,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         type: DataTypes.INTEGER,
         references:{
           model : 'Diaries',
           key : 'id',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE',
         },
       },
     })

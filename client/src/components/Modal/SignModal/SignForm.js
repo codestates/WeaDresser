@@ -1,5 +1,6 @@
 import { FormContainer, InputContainer2, EmailDiv, ErrP, RadioContainer} from './SignupStyle';
-import { useForm } from '../../../utils/useForm';
+import { useForm } from '../../../utils/useForm'
+
 import { useSpring } from '@react-spring/core';
 
 const SignForm = ({ isValid, email }) => {
@@ -15,7 +16,7 @@ const SignForm = ({ isValid, email }) => {
   
   return(
     <>
-    { isValid[0] && isValid[1] ? <EmailDiv className='emailDiv' style={slidUp}>{email}</EmailDiv> : null }
+    { (isValid[0] && isValid[1]) && <EmailDiv className='emailDiv' style={slidUp}>{email}</EmailDiv> }
     <form id='signForm' onSubmit={handleSubmit}>
       <FormContainer style={slidUp}>
         <InputContainer2 >

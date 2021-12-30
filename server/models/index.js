@@ -33,14 +33,14 @@ Object.keys(db).forEach(modelName => {
 });
 
 const { Diarie,  User, Like, Hashtag, DiariesHashtag } = sequelize.models;
-User.hasMany(Diarie, { foreignKey : 'userId', } );
-User.hasMany(Like, { foreignKey : 'userId', });
+User.hasMany(Diarie, { foreignKey : 'userId', onDelete: 'CASCADE'} );
+User.hasMany(Like, { foreignKey : 'userId', onDelete: 'CASCADE'});
 
-Diarie.belongsTo(User, { foreignKey : 'userId', });
-Diarie.hasMany(Like, { foreignKey : 'diarieId', });
+Diarie.belongsTo(User, { foreignKey : 'userId',onDelete: 'CASCADE' });
+Diarie.hasMany(Like, { foreignKey : 'diarieId', onDelete: 'CASCADE'});
 
-Like.belongsTo(User, {  foreignKey : 'userId', });
-Like.belongsTo(Diarie, { foreignKey : 'diarieId', });
+Like.belongsTo(User, {  foreignKey : 'userId', onDelete: 'CASCADE'});
+Like.belongsTo(Diarie, { foreignKey : 'diarieId', onDelete: 'CASCADE'});
 
 Diarie.belongsToMany(Hashtag, { through : DiariesHashtag });
 Hashtag.belongsToMany(Diarie, { through : DiariesHashtag });

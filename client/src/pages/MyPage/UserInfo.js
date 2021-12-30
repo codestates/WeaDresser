@@ -37,15 +37,12 @@ function UserInfo(){
     const [closeSocial, setCloseSocial] = useState(true);
 
     useEffect(() => {
-        console.log("useEffect get request")
         /*const curUser = window.sessionStorage.getItem('email');*/
         // 로딩 넣으면 좋을듯
-        // console.log(userData)
         axios.get(`${process.env.REACT_APP_SERVER_URL}/mypage/users`, {withCredentials: true})
             .then(res => {
                 setIsSocial(res.data.data.social);
                 setCurUserNickname(res.data.data.userName)
-                console.log(isSocial)
             })
             .catch(err => {
 
@@ -103,7 +100,6 @@ function UserInfo(){
 
         axios.patch(`${process.env.REACT_APP_SERVER_URL}/mypage/users`,userData2,{withCredentials : true})
             .then(res => {
-                console.log(res)
                 setSucUpdate(true)
                 setShowUpdateModal(true)
                 setCurUserNickname(fixUserName)
@@ -111,7 +107,6 @@ function UserInfo(){
                 setUpdatePw('')
                 setCheckUpdatePw('')
                 setFixUserName('')
-                console.log(curUserPw)
             })
             .catch(err => {
                 setSucUpdate(false)

@@ -5,6 +5,7 @@ export const LowerPageContainer = styled.div`
     width: 100%;
     height: 100vh;
     position: relative;
+    background-color: rgb(236, 234, 245);
 `
 export const LowerPageBox = styled.div`
     width: 60%;

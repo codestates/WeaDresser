@@ -7,11 +7,10 @@ require('dotenv').config();
 
 export const useLoading = () => {
 
-  // const { accessToken } = useSelector(state => state.isLoginReducer)
   // const history = useHistory();
   const dispatch = useDispatch();
   const loginStateHandler = useCallback( bool =>dispatch(loginSuccessHandler(bool, "")), [dispatch] )
-  const { tempLoading }  = useSelector(state => state.tempLoadingReducer); // redux-thunk 다시 보기
+  const { tempLoading }  = useSelector(state => state.tempLoadingReducer); 
 
   useEffect( ()=> {
     if(sessionStorage.getItem('isLogin')) loginStateHandler(true)
@@ -34,20 +33,19 @@ export const useLoading = () => {
   }, [dispatch])
 
   const logoutHandler = async () => {
-    const SERVER = process.env.REACT_APP_SERVER_URL || "http://localhost:80"
-    await axios.post(SERVER + "/users/signout")
+    const SERVER = process.env.REACT_APP_SERVER_URL
+    await axios.post(SERVER + "/users/signout", {}, {withCredentials: true})
       .then( result => {
         dispatch(loginSuccessHandler(false, ""))
         sessionStorage.removeItem('isLogin')
         // history.push('/')
         //! url 변경은 되나 컴포넌트가 ladning page로 가지 않음 ! 
-        window.location.assign('https://localhost:3000') // <- 강제 home 
+        window.location.assign('https://www.weadresser.ml') // <- 강제 home 
       })
       .catch( err => {
         console.log(err) // err handler
       })
     // history.push('/')
-    // 
   }
 
   return { 

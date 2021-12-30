@@ -25,15 +25,9 @@ module.exports = {
     const code = Math.floor(Math.random() * (1000000 - 100000) + 100000);
     sendEmailCode(res, email,code)
       ? res.status(200).json({ code : code })
-      : res.status(403).send("failed to send email")
+      : res.status(500).send("failed to send email")
   },
 
-  // *  GET users/email?:code
-  sendEmail: (req, res) => {
-    const { email } = req.params;
-    console.log("ok it works", req.params);
-
-  },
 
   // *  POST users/signin
   signin: async (req, res) => {
@@ -96,12 +90,14 @@ module.exports = {
   signout: (req, res) => {
     console.log("its comming now")
 
-    // res.clearCookie('Bearer', { domain: "localhost" });
+    // res.clearCookie('jwt');
+//	return res.json({ message: 'logout success' })
     res.clearCookie("Bearer", {
       secure: true,
       sameSite: "none",
       httpOnly: true,
-    });
-    return res.status(205).send('Logged out successfully') 
+      path: "/",
+      domain: "weadresser.ml"
+    }).status(205).send('Logged out successfully') 
   },
 };

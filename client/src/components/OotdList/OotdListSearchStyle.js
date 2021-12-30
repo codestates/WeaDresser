@@ -10,6 +10,7 @@ export const OotdListSearchContainer = styled.div`
     display: flex;
     padding: 0 3px;
     justify-content: space-between;
+    background-color: #fff;
 `;
 
 export const OotdListSearchInput = styled.input.attrs(props => ({

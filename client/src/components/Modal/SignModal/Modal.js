@@ -18,7 +18,7 @@ const Modal = ({ setGoHomeNow }) => {
     getGoogleUserInfo, handleGoogleLoginApi,
   } = useLoginApi();
   const history = useHistory();
-  const  modalRef = useRef();
+  const modalRef = useRef();
 
   // Modal False by clx btn 
   const closeModalByBtn = e => {

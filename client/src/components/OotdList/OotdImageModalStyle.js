@@ -19,6 +19,7 @@ export const OotdImageModalCont = styled.div`
     background: #fff;
     padding: 1em 1em 4em 1em;
     box-sizing: border-box;
+    width: 33%;
 
 `
 export const OotdImageModalImg = styled.img`
@@ -27,4 +28,5 @@ export const OotdImageModalImg = styled.img`
     z-index: 999;
     background-image: url(${props => props.clickImage});
     box-sizing: border-box;
+    width: 100%;
 `

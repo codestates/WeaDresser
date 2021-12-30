@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import RecordPage from './pages/RecordPage/RecordPage';
 import { useLoading } from './utils/useLoading';
 import Footer from './components/Footer/Footer'
+import ScrollToTop from './utils/ScrollToTop'
 require('dotenv').config();
 
 function App() {
@@ -19,8 +20,9 @@ function App() {
       <div className="App">
         <NavBar logoutHandler={logoutHandler}/>
         {/* <UserInfo/> */}
+        <ScrollToTop />
         <Switch>
-          <Route exact path = '/'><LandingPage /></Route>
+          <Route exact path = '/'> <LandingPage /></Route>
           <Route path = '/mypage'>{tempLoading ? <MyPage /> : <LoadingIndicator/>}</Route>
           <Route path = '/ootd-list'>{tempLoading ? <OotdListPage/> : <LoadingIndicator/>}</Route>
           <Route path = '/record'>{tempLoading ? <RecordPage /> : <LoadingIndicator/>}</Route>

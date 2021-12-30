@@ -18,11 +18,11 @@ module.exports = {
       userId : {
         type: DataTypes.INTEGER,
         //   allowNull: false,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
           references:{
             model : 'Users',
             key : 'id',
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
           },
       },
       weather: {

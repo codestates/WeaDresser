@@ -74,13 +74,14 @@ export function setAccessToken(accessToken) {
 
 export function getLocationData(lat, lot) {
     return (async dispatch => {
-        const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lot}&appid=${process.env.REACT_APP_API_KEY}`)
+        const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lot}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
             .catch(err => {
                 console.log('err', err)
                 dispatch(isLoadingHandler(false))
                 dispatch(tempLoadingHandler(false))
             });
         if(result){
+            console.log(result.data)
             const { coord, main, name, sys, weather } = result.data;
             dispatch(getWeatherData({ coord, main, name, sys, weather }))
             dispatch(tempLoadingHandler(true))

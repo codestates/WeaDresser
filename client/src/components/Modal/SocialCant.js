@@ -3,7 +3,7 @@ import styled from "styled-components";
 import socialAlert from '../../images/userinfo_social_alert.svg'
 
 const SocialCantContainer = styled.div`
-    position: relative;
+    position: absolute;
     top: 45%;
     left: 50%;
     z-index: 99;

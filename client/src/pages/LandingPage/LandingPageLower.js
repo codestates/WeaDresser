@@ -37,15 +37,14 @@ function LandingPageLower(){
     const { isLogin } = useSelector(state => state.isLoginReducer);
 
     function userWoreImageRequest(){
-        let tempMax = (parseInt((curTemp.temp_max - 273.15) * 10)) / 10
-        let tempMin = (parseInt((curTemp.temp_min - 273.15) * 10)) / 10
+        let tempMax = Math.round(curTemp.temp_max * 10 / 10).toFixed(1);
+        let tempMin = Math.round(curTemp.temp_min * 10 / 10).toFixed(1);
         let url = isLogin ? `${process.env.REACT_APP_SERVER_URL}/user` : `${process.env.REACT_APP_SERVER_URL}`
         axios.get(`${url}?tempMax=${tempMax}&tempMin=${tempMin}`, {withCredentials: true})
         .then( res => {
-            console.log(res.data[0])
             setIsData(true);
-            setWereImage(res.data[0].diariesImage);
-            setBestImage(res.data[1].diariesImage)
+            setWereImage(res.data[0].image);
+            setBestImage(res.data[1].image)
             setUserName(res.data[0].userName)
             setCreateAt(`${res.data[0].createdAt.split('T')[0].split('-')[0]}년 ${res.data[0].createdAt.split('T')[0].split('-')[1]} 월 ${res.data[0].createdAt.split('T')[0].split('-')[2]}일`)
             setLikeWhetherLeft(res.data[0].likeWhether);

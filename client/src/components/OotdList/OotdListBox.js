@@ -61,8 +61,8 @@ function OotdListBox(){
     }, [])
 
     const getOotdList = () => { // 이건 날씨를 고려한 ootdlist 검색 X
-        let tempMax = (parseInt((curTemp.temp_max - 273.15) * 10)) / 10
-        let tempMin = (parseInt((curTemp.temp_min - 273.15) * 10)) / 10
+        let tempMax = Math.round(curTemp.temp_max * 10 / 10).toFixed(1);
+        let tempMin = Math.round(curTemp.temp_min * 10 / 10).toFixed(1);
         axios.get(
             `${process.env.REACT_APP_SERVER_URL}/ootd?tempMax=${tempMax}&tempMin=${tempMin}&offset=${listOffset}&limit=${listLimit}`,
             { withCredentials: true }
@@ -113,7 +113,7 @@ function OotdListBox(){
         //     setReSearch(false);
         // }
         console.log(searchOffset)
-        setScrollOffset(5);
+        setScrollOffset(30);
         axios.get(
             `${process.env.REACT_APP_SERVER_URL}/ootd?hashtag=${searchHash}&offset=${searchOffset}&limit=${listLimit}`,
             { withCredentials: true }
